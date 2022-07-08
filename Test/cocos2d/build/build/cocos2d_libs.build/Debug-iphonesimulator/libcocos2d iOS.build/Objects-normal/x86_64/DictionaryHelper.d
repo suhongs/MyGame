@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/build/../cocos/platform/ios/cocos2d-prefix.pch \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/editor-support/cocostudio/DictionaryHelper.cpp \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/platform/CCPlatformMacros.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/base/ccConfig.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/platform/CCPlatformConfig.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/platform/CCPlatformDefine.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/platform/ios/CCPlatformDefine-ios.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/editor-support/cocostudio/DictionaryHelper.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/document-wrapper.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/rapidjson.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/document.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/reader.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/allocators.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/stream.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/encodings.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/encodedstream.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/memorystream.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/meta.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/../rapidjson.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/stack.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/../allocators.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/swap.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/strtod.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/ieee754.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/biginteger.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/diyfp.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/pow10.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/error/error.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/error/../rapidjson.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/strfunc.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/external/json/internal/../stream.h \
+  /Users/clidev-rlatnghd1236/Desktop/Test/cocos2d/cocos/editor-support/cocostudio/CocosStudioExport.h
