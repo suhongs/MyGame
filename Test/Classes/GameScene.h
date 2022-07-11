@@ -57,6 +57,8 @@ public:
     int getScore();
     void getPoint();
     void setScore(int score);
+    void getNextStage();
+    void endGame();
     
 private:
     int score = 0;

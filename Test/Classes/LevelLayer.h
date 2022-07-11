@@ -12,7 +12,7 @@
 class LevelLayer : public cocos2d::Layer
 {
 public:
-    Star* star[5];
+    cocos2d::DrawNode* star[5];
     cocos2d::DrawNode* bomb[5];
     cocos2d::EventListenerTouchOneByOne* listener[10];
     

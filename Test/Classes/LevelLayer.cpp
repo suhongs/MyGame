@@ -94,12 +94,20 @@ bool LevelLayer::init()
 
 void LevelLayer::makeStar()
 {
+    Vec2 rec[3];
+    rec[0] = Vec2(-10, -10);
+    rec[1] = Vec2(10, -10);
+    rec[2] = Vec2(0, 10);
+    
     for(int i = 0 ; i < 5; i++)
     {
-        star[i] = Star::create("Star.png");
-        star[i]->setTag(LevelSceneTag::STAR1+i);
-        
+        star[i] = Star::create();
+        star[i]->drawPolygon(rec, 3, Color4F::YELLOW, 1, Color4F::YELLOW);
+        star[i]->setPosition(100 + rand()%350,50+ rand() % 200);
+        star[i]->setContentSize(Size(20, 20));
+        star[i]->setAnchorPoint(Vec2(0,0));
         this->addChild(star[i]);
+        star[i]->setTag(i+LevelSceneTag::STAR1);
     }
 }
 
@@ -133,15 +141,7 @@ void LevelLayer::onEnter()
     
     if (gameScene->level == 2)
         return;
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     for (int i = 0 ; i < 5; i++)
     {

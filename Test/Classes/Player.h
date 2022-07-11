@@ -39,8 +39,9 @@ private:
     void moveUp();
     void moveDown();
     void checkCollison();
-    void resetPlayer();
+    void resetPosition();
     
+    virtual cocos2d::Rect getBoundingBox() override;
     virtual void onCollisionEnter(GameObject* pColObj) override;
 
 };

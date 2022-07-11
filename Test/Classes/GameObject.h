@@ -14,4 +14,5 @@ class GameObject
     
 public:
     virtual void onCollisionEnter(GameObject* pObj);
+    virtual cocos2d::Rect getBoundingBox();
 };

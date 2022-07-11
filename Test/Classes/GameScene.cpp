@@ -33,6 +33,7 @@
 #include "LevelLayer.h"
 #include "string.h"
 #include "GameObject.h"
+#include "EndingScene.h"
 
 
 USING_NS_CC;
@@ -87,29 +88,26 @@ void GameScene::collisionUpdate()
 {
     Vector<Node*> vecNodeLeft = levelLayer_->getChildren();
     vecNodeLeft.pushBack(player);
+    
     Vector<Node*> vecNodeRight = levelLayer_->getChildren();
     vecNodeRight.pushBack(player);
     
-    for(auto& pNodeLeft : vecNodeLeft)
+    for(int i = 0; i < vecNodeLeft.size()-1; i++)
     {
-        GameObject* pGameLeft = dynamic_cast<GameObject*>(pNodeLeft);
-        if(nullptr == pGameLeft)
+        GameObject* pGameLeft = dynamic_cast<GameObject*>(vecNodeLeft.at(i));
+        if(pGameLeft == nullptr)
             continue;
-        
-        for(auto& pNodeRight : vecNodeRight)
+        for(int j = i+1; j < vecNodeLeft.size(); j++)
         {
-            GameObject* pGameRight = dynamic_cast<GameObject*>(pNodeRight);
-            if(nullptr == pGameRight)
-                continue;
-            
-            if(pGameLeft == pGameRight)
+            GameObject* pGameRight = dynamic_cast<GameObject*>(vecNodeRight.at(j));
+            if(pGameRight == nullptr)
                 continue;
             
             // 충돌체크
             bool isCollision = checkCollision(pGameLeft, pGameRight);
             if(false == isCollision)
                 continue;
-            CCLOG("Collison");
+
             pGameLeft->onCollisionEnter(pGameRight);
             pGameRight->onCollisionEnter(pGameLeft);
         }
@@ -118,8 +116,8 @@ void GameScene::collisionUpdate()
 
 bool GameScene::checkCollision(GameObject* pLeft, GameObject* pRight)
 {
-    Rect rectPLeft = ((Sprite*)pLeft)->getBoundingBox();
-    Rect rectPRight = ((Sprite*)pRight)->getBoundingBox();
+    Rect rectPLeft = pLeft->getBoundingBox();
+    Rect rectPRight = pRight->getBoundingBox();
     
     if(rectPLeft.intersectsRect(rectPRight))
     {
@@ -139,9 +137,26 @@ int GameScene::getScore()
 void GameScene::getPoint()
 {
     this->setScore(this->getScore()+10);
+    
+    ((Label*)(hudLayer_->getChildByTag(HUDLayerTag::LABELSCORE)))->setString("Score : " + std::to_string(score));
 }
 
 void GameScene::setScore(int score)
 {
     this->score = score;
+}
+
+void GameScene::getNextStage()
+{
+    level++;
+    removeChild(levelLayer_);
+    levelLayer_ = LevelLayer::create();
+    levelLayer_->setTag(GameSceneTag::LEVELSCENE);
+    ((Label*)(hudLayer_->getChildByTag(HUDLayerTag::LABELLEVEL)))->setString("Level " + std::to_string(level));
+    this->addChild(levelLayer_);
+}
+
+void GameScene::endGame()
+{
+    Director::getInstance()->replaceScene(EndingScene::create());
 }

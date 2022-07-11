@@ -24,6 +24,7 @@ public:
 public:
     void createMyController();
     void move(PlayerState state);
+    void setLevelLabelText(String text);
     
 private:
     int score;

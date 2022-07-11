@@ -7,40 +7,65 @@
 
 #include "Star.h"
 #include "GameScene.h"
+#include "LevelLayer.h"
+#include "cocos2d.h"
 
-Star* Star::create(const std::string& filename)
+Star::Star(GLfloat lineWidth)
+: _lineWidth(lineWidth)
+, _defaultLineWidth(lineWidth)
 {
-    Star* pStar = new (std::nothrow) Star();
-    if (pStar && pStar->init(filename))
-    {
-        pStar->autorelease();
-        return pStar;
-    }
-    
-    CC_SAFE_DELETE(Star);
-    return nullptr;
+    _blendFunc = cocos2d::BlendFunc::ALPHA_PREMULTIPLIED;
+#if CC_ENABLE_CACHE_TEXTURE_DATA
+    // Need to listen the event only when not use batchnode, because it will use VBO
+    auto listener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, [this](EventCustom* event){
+        /** listen the event that renderer was recreated on Android/WP8 */
+        this->setupBuffer();
+    });
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+#endif
 }
 
-bool Star::init(const std::string& filename)
+Star* Star::create(GLfloat defaultLineWidth)
 {
-    if(initWithFile(filename) == false)
+    Star* ret = new (std::nothrow) Star(defaultLineWidth);
+    if (ret && ret->init())
+    {
+        ret->autorelease();
+    }
+    else
+    {
+        CC_SAFE_DELETE(ret);
+    }
+    
+    return ret;
+}
+
+bool Star::init()
+{
+    if(DrawNode::init() == false)
         return false;
     
-    setAnchorPoint(Vec2(0, 0));
-    setPosition(posX, posY);
     
     return true;
 }
+
+cocos2d::Rect Star::getBoundingBox()
+{
+    cocos2d::Rect rec(getPosition().x, getPosition().y, getContentSize().width, getContentSize().height);
+    
+    return rec;
+}
+
 
 void Star::onCollisionEnter(GameObject* pColObj)
 {
     Player* pPlayer = dynamic_cast<Player*>(pColObj);
     if(pPlayer!=nullptr)
     {
-        removeFromParent();
-        
-        GameScene* gameScene = (GameScene*)this->getParent()->getParent();
+        GameScene* gameScene = (GameScene*)pPlayer->getParent();
+        gameScene->alreadyGetPoint = true;
         gameScene->getPoint();
+        removeFromParent();
     }
-    
 }
