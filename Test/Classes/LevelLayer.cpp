@@ -32,20 +32,9 @@ bool LevelLayer::init()
 {
     Layer::init();
     
-    Vec2 rectangle[4];
-    rectangle[0] = Vec2(-10, -10);
-    rectangle[1] = Vec2(10, -10);
-    rectangle[2] = Vec2(10, 10);
-    rectangle[3] = Vec2(-10, 10);
-    
-    DrawNode* myExit = MyExit::create();
-    myExit->drawPolygon(rectangle, 4, Color4F::WHITE, 1, Color4F::WHITE);
-    myExit->setPosition(400, 200);
-    myExit->setTag(LevelSceneTag::EXIT);
-    this->addChild(myExit);
-    
     makeStar();
     makeBomb();
+    makeExit();
     
     for(int i = 0 ; i < 10; i++)
     {
@@ -90,6 +79,39 @@ bool LevelLayer::init()
     }
     
     return true;
+}
+
+void LevelLayer::makeExit()
+{
+    Vec2 rectangle[4];
+    rectangle[0] = Vec2(-10, -10);
+    rectangle[1] = Vec2(10, -10);
+    rectangle[2] = Vec2(10, 10);
+    rectangle[3] = Vec2(-10, 10);
+    
+    DrawNode* myExit = MyExit::create();
+    myExit->drawPolygon(rectangle, 4, Color4F::WHITE, 1, Color4F::WHITE);
+    myExit->setPosition(400, 200);
+    myExit->setTag(LevelSceneTag::EXIT);
+    this->addChild(myExit);
+}
+
+
+void LevelLayer::onExit()
+{
+    for(int i = 0; i < 10; i++)
+        _eventDispatcher->removeEventListener(listener[i]);
+    Layer::onExit();
+}
+
+void LevelLayer::reZorder(cocos2d::DrawNode *pSender)
+{
+    for(int i = 0; i < 5; i++)
+    {
+        star[i]->setZOrder(0);
+        bomb[i]->setZOrder(0);
+    }
+    pSender->setZOrder(1);
 }
 
 void LevelLayer::makeStar()
@@ -147,22 +169,4 @@ void LevelLayer::onEnter()
     {
         this->removeChild((Bomb*)this->getChildByTag(i+LevelSceneTag::BOMB1));
     }
-}
-
-
-void LevelLayer::onExit()
-{
-    for(int i = 0; i < 10; i++)
-        _eventDispatcher->removeEventListener(listener[i]);
-    Layer::onExit();
-}
-
-void LevelLayer::reZorder(cocos2d::DrawNode *pSender)
-{
-    for(int i = 0; i < 5; i++)
-    {
-        star[i]->setZOrder(0);
-        bomb[i]->setZOrder(0);
-    }
-    pSender->setZOrder(1);
 }

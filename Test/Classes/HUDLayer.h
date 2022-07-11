@@ -24,7 +24,7 @@ public:
 public:
     void createMyController();
     void move(PlayerState state);
-    void setLevelLabelText(String text);
+    void setLabelText(int target, const std::string &text);
     
 private:
     int score;

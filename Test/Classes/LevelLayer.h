@@ -28,6 +28,7 @@ public:
 public:
     void makeStar();
     void makeBomb();
+    void makeExit();
     
     
 };

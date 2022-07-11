@@ -64,7 +64,6 @@ void Star::onCollisionEnter(GameObject* pColObj)
     if(pPlayer!=nullptr)
     {
         GameScene* gameScene = (GameScene*)pPlayer->getParent();
-        gameScene->alreadyGetPoint = true;
         gameScene->getPoint();
         removeFromParent();
     }

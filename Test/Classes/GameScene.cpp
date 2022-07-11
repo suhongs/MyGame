@@ -137,8 +137,7 @@ int GameScene::getScore()
 void GameScene::getPoint()
 {
     this->setScore(this->getScore()+10);
-    
-    ((Label*)(hudLayer_->getChildByTag(HUDLayerTag::LABELSCORE)))->setString("Score : " + std::to_string(score));
+    hudLayer_->setLabelText(HUDLayerTag::LABELSCORE, "Score : " + std::to_string(score));
 }
 
 void GameScene::setScore(int score)
@@ -152,7 +151,7 @@ void GameScene::getNextStage()
     removeChild(levelLayer_);
     levelLayer_ = LevelLayer::create();
     levelLayer_->setTag(GameSceneTag::LEVELSCENE);
-    ((Label*)(hudLayer_->getChildByTag(HUDLayerTag::LABELLEVEL)))->setString("Level " + std::to_string(level));
+    hudLayer_->setLabelText(HUDLayerTag::LABELLEVEL, "Level : " + std::to_string(level));
     this->addChild(levelLayer_);
 }
 

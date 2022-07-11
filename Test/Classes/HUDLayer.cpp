@@ -146,3 +146,12 @@ void HUDLayer::move(PlayerState state)
     auto player = gameScene->player;
     player->move(state);
 }
+
+void HUDLayer::setLabelText(int target, const std::string &text)
+{
+    switch (target)
+    {
+        case HUDLayerTag::LABELSCORE:   ((Label*)this->getChildByTag(HUDLayerTag::LABELSCORE))->setString(text);    break;
+        case HUDLayerTag::LABELLEVEL:   ((Label*)this->getChildByTag(HUDLayerTag::LABELLEVEL))->setString(text);    break;
+    }
+}
