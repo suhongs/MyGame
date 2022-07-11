@@ -21,7 +21,6 @@ enum PlayerState
     DOWN_MOVE,
 };
 
-
 class Player : public cocos2d::Sprite, public GameObject
 {
 public:

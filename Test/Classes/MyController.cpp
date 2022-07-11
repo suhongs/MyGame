@@ -9,10 +9,12 @@
 #include "GameScene.h"
 
 
-MyController * MyController::create(Node*label, const cocos2d::ccMenuCallback& callback)
+MyController * MyController::create(const std::string &text, int size, const cocos2d::ccMenuCallback& callback)
 {
+    auto label = cocos2d::Label::createWithTTF(text, "fonts/Marker Felt.ttf", size);
+    
     MyController *ret = new (std::nothrow) MyController();
-    ret->initWithLabel(label, callback);
+    ret->initWithLabel(label, NULL);
     ret->autorelease();
     return ret;
 }

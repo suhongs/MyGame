@@ -60,11 +60,6 @@ void Player::moveDown()
     this->setPosition(this->getPosition() + Vec2(0, -2));
 }
 
-void Player::checkCollison()
-{
-
-}
-
 void Player::resetPosition()
 {
     this->setPosition(100, 200);
@@ -81,15 +76,10 @@ void Player::move(PlayerState state)
         default:
             break;
     }
-    
-    this->checkCollison();
 }
 
 cocos2d::Rect Player::getBoundingBox()
 {
-//    AABB aabb = getAABB();
-//    Rect ret(aabb._min.x, aabb._min.y, (aabb._max.x - aabb._min.x), (aabb._max.y - aabb._min.y));
-//    return ret;
     cocos2d::Rect rec(getPosition().x, getPosition().y, getContentSize().width, getContentSize().height);
     
     return rec;

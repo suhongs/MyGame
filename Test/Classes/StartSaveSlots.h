@@ -14,6 +14,8 @@ public:
     virtual bool init() override;
     void menuCallback(Ref* pSender);
     
+    void makeSlot();
+    
 private:
     
 };

@@ -81,22 +81,6 @@ bool LevelLayer::init()
     return true;
 }
 
-void LevelLayer::makeExit()
-{
-    Vec2 rectangle[4];
-    rectangle[0] = Vec2(-10, -10);
-    rectangle[1] = Vec2(10, -10);
-    rectangle[2] = Vec2(10, 10);
-    rectangle[3] = Vec2(-10, 10);
-    
-    DrawNode* myExit = MyExit::create();
-    myExit->drawPolygon(rectangle, 4, Color4F::WHITE, 1, Color4F::WHITE);
-    myExit->setPosition(400, 200);
-    myExit->setTag(LevelSceneTag::EXIT);
-    this->addChild(myExit);
-}
-
-
 void LevelLayer::onExit()
 {
     for(int i = 0; i < 10; i++)
@@ -116,18 +100,10 @@ void LevelLayer::reZorder(cocos2d::DrawNode *pSender)
 
 void LevelLayer::makeStar()
 {
-    Vec2 rec[3];
-    rec[0] = Vec2(-10, -10);
-    rec[1] = Vec2(10, -10);
-    rec[2] = Vec2(0, 10);
-    
     for(int i = 0 ; i < 5; i++)
     {
         star[i] = Star::create();
-        star[i]->drawPolygon(rec, 3, Color4F::YELLOW, 1, Color4F::YELLOW);
         star[i]->setPosition(100 + rand()%350,50+ rand() % 200);
-        star[i]->setContentSize(Size(20, 20));
-        star[i]->setAnchorPoint(Vec2(0,0));
         this->addChild(star[i]);
         star[i]->setTag(i+LevelSceneTag::STAR1);
     }
@@ -135,21 +111,22 @@ void LevelLayer::makeStar()
 
 void LevelLayer::makeBomb()
 {
-    Vec2 rec[3];
-    rec[0] = Vec2(-10, -10);
-    rec[1] = Vec2(10, -10);
-    rec[2] = Vec2(0, 10);
-    
     for(int i = 0 ; i < 5; i++)
     {
         bomb[i] = Bomb::create();
-        bomb[i]->drawPolygon(rec, 3, Color4F::RED, 1, Color4F::RED);
         bomb[i]->setPosition(100 + rand()%350,50+ rand() % 200);
-        bomb[i]->setContentSize(Size(20, 20));
-        bomb[i]->setAnchorPoint(Vec2(0,0));
         this->addChild(bomb[i]);
         bomb[i]->setTag(i+LevelSceneTag::BOMB1);
     }
+}
+
+
+void LevelLayer::makeExit()
+{
+    DrawNode* myExit = MyExit::create();
+    myExit->setPosition(400, 200);
+    myExit->setTag(LevelSceneTag::EXIT);
+    this->addChild(myExit);
 }
 
 void LevelLayer::onEnter()

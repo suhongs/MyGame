@@ -46,6 +46,15 @@ bool Star::init()
     if(DrawNode::init() == false)
         return false;
     
+    Vec2 rec[3];
+    rec[0] = Vec2(-10, -10);
+    rec[1] = Vec2(10, -10);
+    rec[2] = Vec2(0, 10);
+    
+    drawPolygon(rec, 3, Color4F::YELLOW, 1, Color4F::YELLOW);
+    
+    setContentSize(Size(20, 20));
+    setAnchorPoint(Vec2(0,0));
     
     return true;
 }

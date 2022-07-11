@@ -45,7 +45,13 @@ bool MyExit::init()
     if(DrawNode::init() == false)
         return false;
     
-    //
+    Vec2 rectangle[4];
+    rectangle[0] = Vec2(-10, -10);
+    rectangle[1] = Vec2(10, -10);
+    rectangle[2] = Vec2(10, 10);
+    rectangle[3] = Vec2(-10, 10);
+    
+    drawPolygon(rectangle, 4, Color4F::WHITE, 1, Color4F::WHITE);
     return true;
 }
 

@@ -8,19 +8,9 @@
 #include "Bomb.h"
 
 Bomb::Bomb(GLfloat lineWidth)
-: _lineWidth(lineWidth)
-, _defaultLineWidth(lineWidth)
+: cocos2d::DrawNode(lineWidth)
 {
-    _blendFunc = cocos2d::BlendFunc::ALPHA_PREMULTIPLIED;
-#if CC_ENABLE_CACHE_TEXTURE_DATA
-    // Need to listen the event only when not use batchnode, because it will use VBO
-    auto listener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, [this](EventCustom* event){
-        /** listen the event that renderer was recreated on Android/WP8 */
-        this->setupBuffer();
-    });
 
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-#endif
 }
 
 Bomb* Bomb::create(GLfloat defaultLineWidth)
@@ -43,6 +33,15 @@ bool Bomb::init()
     if(DrawNode::init() == false)
         return false;
     
+    Vec2 rec[3];
+    rec[0] = Vec2(-10, -10);
+    rec[1] = Vec2(10, -10);
+    rec[2] = Vec2(0, 10);
+    
+    drawPolygon(rec, 3, Color4F::RED, 1, Color4F::RED);
+    
+    setContentSize(Size(20, 20));
+    setAnchorPoint(Vec2(0,0));
     
     return true;
 }

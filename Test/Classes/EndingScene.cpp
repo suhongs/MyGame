@@ -24,7 +24,14 @@ bool EndingScene::init()
     {
         return false;
     }
+    
+    makeEndingMenuItem();
+    
+    return true;
+}
 
+void EndingScene::makeEndingMenuItem()
+{
     auto labelMenu = Label::createWithTTF("MENU", "fonts/Marker Felt.ttf", 24);
     auto labelEnd = Label::createWithTTF("END", "fonts/Marker Felt.ttf", 24);
     
@@ -34,8 +41,6 @@ bool EndingScene::init()
     auto menu = Menu::create(itemMenu, itemEnd, NULL);
     menu->alignItemsVertically();
     this->addChild(menu);
-    
-    return true;
 }
 
 void EndingScene::menuResumeCallback(Ref* pSender)

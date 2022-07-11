@@ -15,7 +15,5 @@ void GameObject::onCollisionEnter(GameObject* pObj)
 
 cocos2d::Rect GameObject::getBoundingBox()
 {
-    //cocos2d::Rect rec(getPosition().x, getPosition().y, getContentSize().width, getContentSize().height);
-    
-    //return ;
+    return cocos2d::Rect::ZERO;
 }

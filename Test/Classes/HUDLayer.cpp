@@ -48,40 +48,7 @@ bool HUDLayer::init()
     this->addChild(labelScore);
     labelScore->setTag(HUDLayerTag::LABELSCORE);
     
-    auto labelUp = cocos2d::Label::createWithTTF("up", "fonts/Marker Felt.ttf", 24);
-    auto labelDown = cocos2d::Label::createWithTTF("down", "fonts/Marker Felt.ttf", 24);
-    auto labelLeft = cocos2d::Label::createWithTTF("left", "fonts/Marker Felt.ttf", 24);
-    auto labelRight = cocos2d::Label::createWithTTF("right", "fonts/Marker Felt.ttf", 24);
-    auto labelSave = cocos2d::Label::createWithTTF("save", "fonts/Marker Felt.ttf", 10);
-    auto labelMenu = cocos2d::Label::createWithTTF("menu", "fonts/Marker Felt.ttf", 10);
-    
-    MyController* itemUp = MyController::create(labelUp,NULL);
-    MyController* itemDown = MyController::create(labelDown, NULL);
-    MyController* itemLeft = MyController::create(labelLeft, NULL);
-    MyController* itemRight = MyController::create(labelRight, NULL);
-    MyController* itemSave = MyController::create(labelSave, NULL);
-    MyController* itemMenu = MyController::create(labelMenu, CC_CALLBACK_1(HUDLayer::menuCallback, this));
-    
-    itemRight->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::RIGHT_MOVE));
-    itemUp->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::UP_MOVE));
-    itemDown->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::DOWN_MOVE));
-    itemLeft->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::LEFT_MOVE));
-    itemSave->setCallback(CC_CALLBACK_1(HUDLayer::menuSaveCallback, this));
-    itemMenu->setCallback(CC_CALLBACK_1(HUDLayer::backToMenuCallback, this));
-    
-    auto menu = Menu::create(itemUp, itemDown, itemLeft, itemRight, itemSave, itemMenu, NULL);
-    menu->setAnchorPoint(Vec2(0, 0));
-    menu->setPosition(0, 0);
-    this->addChild(menu);
-    
-    itemUp->setPosition(Vec2(100, 70));
-    itemDown->setPosition(Vec2(100, 20));
-    itemLeft->setPosition(Vec2(60, 50));
-    itemRight->setPosition(Vec2(150, 50));
-    itemSave->setPosition(Vec2(30, 290));
-    itemSave->setAnchorPoint(cocos2d::Vec2(0, 0));
-    itemMenu->setPosition(Vec2(30, 306));
-    itemMenu->setAnchorPoint(cocos2d::Vec2(0, 0));
+    createMyController();
     
     return true;
 }
@@ -154,4 +121,35 @@ void HUDLayer::setLabelText(int target, const std::string &text)
         case HUDLayerTag::LABELSCORE:   ((Label*)this->getChildByTag(HUDLayerTag::LABELSCORE))->setString(text);    break;
         case HUDLayerTag::LABELLEVEL:   ((Label*)this->getChildByTag(HUDLayerTag::LABELLEVEL))->setString(text);    break;
     }
+}
+
+void HUDLayer::createMyController()
+{
+    MyController* itemUp    = MyController::create("up", 24, NULL);
+    MyController* itemDown  = MyController::create("down", 24, NULL);
+    MyController* itemRight = MyController::create("right", 24, NULL);
+    MyController* itemLeft  = MyController::create("left", 24, NULL);
+    MyController* itemSave  = MyController::create("save", 10, NULL);
+    MyController* itemMenu  = MyController::create("menu", 10, CC_CALLBACK_1(HUDLayer::menuCallback, this));
+    
+    itemRight->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::RIGHT_MOVE));
+    itemUp->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::UP_MOVE));
+    itemDown->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::DOWN_MOVE));
+    itemLeft->setHoldCallback(CC_CALLBACK_0(HUDLayer::move, this, PlayerState::LEFT_MOVE));
+    itemSave->setCallback(CC_CALLBACK_1(HUDLayer::menuSaveCallback, this));
+    itemMenu->setCallback(CC_CALLBACK_1(HUDLayer::backToMenuCallback, this));
+    
+    auto menu = Menu::create(itemUp, itemDown, itemLeft, itemRight, itemSave, itemMenu, NULL);
+    menu->setAnchorPoint(Vec2(0, 0));
+    menu->setPosition(0, 0);
+    this->addChild(menu);
+    
+    itemUp->setPosition(Vec2(100, 70));
+    itemDown->setPosition(Vec2(100, 20));
+    itemLeft->setPosition(Vec2(60, 50));
+    itemRight->setPosition(Vec2(150, 50));
+    itemSave->setPosition(Vec2(30, 290));
+    itemSave->setAnchorPoint(cocos2d::Vec2(0, 0));
+    itemMenu->setPosition(Vec2(30, 306));
+    itemMenu->setAnchorPoint(cocos2d::Vec2(0, 0));
 }

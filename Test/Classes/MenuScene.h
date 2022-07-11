@@ -22,8 +22,7 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __MENU_SCENE_H__
-#define __MENU_SCENE_H__
+#pragma once
 
 #include "cocos2d.h"
 USING_NS_CC;
@@ -31,13 +30,17 @@ USING_NS_CC;
 class MenuScene : public Scene
 {
 public:
-    Menu* myMenu;
+    Menu* myMenu = cocos2d::Menu::create(NULL);
 public:
     static Scene* createScene();
-
     virtual bool init() override;
     
+public:
+    void makeMainMenuItem();
+    
+public:
     // a selector callback
+    void menuItemCallback(Ref* pSender);
     void menuStartCallback(Ref* pSender);
     void menuResumeCallback(Ref* pSender);
     void menuCustomCallback(Ref* pSender);
@@ -47,5 +50,3 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(MenuScene);
 };
-
-#endif // __MENU_SCENE_H__

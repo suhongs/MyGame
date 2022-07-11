@@ -31,6 +31,7 @@
 #include "LevelLayer.h"
 #include "ResumeSaveSlots.h"
 #include "CustomSaveSlots.h"
+#include "MainMenuItem.h"
 
 USING_NS_CC;
 
@@ -49,24 +50,32 @@ bool MenuScene::init()
         return false;
     }
 
-    auto labelStart = Label::createWithTTF("START", "fonts/Marker Felt.ttf", 24);
-    auto labelResume = Label::createWithTTF("RESUME", "fonts/Marker Felt.ttf", 24);
-    auto labelCustom = Label::createWithTTF("CUSTOM", "fonts/Marker Felt.ttf", 24);
-    auto labelEnd = Label::createWithTTF("END", "fonts/Marker Felt.ttf", 24);
-    
-    
-    auto itemStart = MenuItemLabel::create(labelStart, CC_CALLBACK_1(MenuScene::menuStartCallback, this));
-    auto itemResume = MenuItemLabel::create(labelResume, CC_CALLBACK_1(MenuScene::menuResumeCallback, this));
-    auto itemCustom = MenuItemLabel::create(labelCustom, CC_CALLBACK_1(MenuScene::menuCustomCallback, this));
-    auto itemEnd = MenuItemLabel::create(labelEnd, CC_CALLBACK_1(MenuScene::menuCloseCallback, this));
-    
-    auto menu = Menu::create(itemStart, itemResume, itemCustom, itemEnd, NULL);
-    menu->alignItemsVerticallyWithPadding(15);
-    this->addChild(menu);
+    makeMainMenuItem();
     
     return true;
 }
 
+void MenuScene::makeMainMenuItem()
+{
+    auto labelStart = Label::createWithTTF("START", "fonts/Marker Felt.ttf", 24);
+    auto labelResume = Label::createWithTTF("RESUME", "fonts/Marker Felt.ttf", 24);
+    auto labelCustom = Label::createWithTTF("CUSTOM", "fonts/Marker Felt.ttf", 24);
+    auto labelEnd = Label::createWithTTF("END", "fonts/Marker Felt.ttf", 24);
+
+    auto itemStart = MenuItemLabel::create(labelStart, CC_CALLBACK_1(MenuScene::menuStartCallback, this));
+    auto itemResume = MenuItemLabel::create(labelResume, CC_CALLBACK_1(MenuScene::menuResumeCallback, this));
+    auto itemCustom = MenuItemLabel::create(labelCustom, CC_CALLBACK_1(MenuScene::menuCustomCallback, this));
+    auto itemEnd = MenuItemLabel::create(labelEnd, CC_CALLBACK_1(MenuScene::menuCloseCallback, this));
+
+    myMenu->addChild(itemStart);
+    myMenu->addChild(itemResume);
+    myMenu->addChild(itemCustom);
+    myMenu->addChild(itemEnd);
+    
+    myMenu->alignItemsVerticallyWithPadding(15);
+    this->addChild(myMenu);
+
+}
 
 void MenuScene::menuStartCallback(Ref* pSender)
 {
@@ -91,9 +100,6 @@ void MenuScene::menuStartCallback(Ref* pSender)
     StartSaveSlots* saveSlot = StartSaveSlots::create();
     saveSlot->setTag(0);
     this->addChild(saveSlot);
-    
-    
-    //Director::getInstance() ->replaceScene(GameScene::create());
 }
 
 

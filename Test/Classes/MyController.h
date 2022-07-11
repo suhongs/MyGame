@@ -16,7 +16,7 @@ private:
     std::function<void()> holdCallback_;
     
 public:
-    static MyController* create(Node*label, const cocos2d::ccMenuCallback& callback);
+    static MyController* create(const std::string &text,int size, const cocos2d::ccMenuCallback& callback);
     
 public:
     virtual void onEnter() override;

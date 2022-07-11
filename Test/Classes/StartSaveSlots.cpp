@@ -31,21 +31,29 @@ bool StartSaveSlots::init()
 {
     cocos2d::Layer::init();
     
+    makeSlot();
+    
+    return true;
+}
+
+void StartSaveSlots::makeSlot()
+{
     cocos2d::Label* labelSlot[6];
     cocos2d::MenuItemLabel* itemSlot[6];
+    auto menu = cocos2d::Menu::create(NULL);
+    
     for(int i = 0 ; i < 6; i++)
     {
         labelSlot[i] = cocos2d::Label::createWithTTF(cocos2d::StringUtils::format("Slot %d", i+1), "fonts/Marker Felt.ttf", 24);
         itemSlot[i] = cocos2d::MenuItemLabel::create(labelSlot[i], CC_CALLBACK_1(StartSaveSlots::menuCallback, this));
         itemSlot[i]->setTag(i);
+        menu->addChild(itemSlot[i]);
     }
-    auto menu = cocos2d::Menu::create(itemSlot[0], itemSlot[1], itemSlot[2], itemSlot[3], itemSlot[4], itemSlot[5], NULL);
+    
     menu->alignItemsVerticallyWithPadding(20);
     menu->setAnchorPoint(cocos2d::Vec2(0, 0));
     menu->setPosition(cocos2d::Vec2(400, 150));
     this->addChild(menu);
-    
-    return true;
 }
 
 void StartSaveSlots::menuCallback(Ref *pSender)

@@ -14,6 +14,10 @@ public:
     static Scene* createScene();
     virtual bool init() override;
     
+public:
+    void makeEndingMenuItem();
+    
+public:    
     void menuResumeCallback(Ref* pSender);
     void menuCloseCallback(Ref* pSender);
     
